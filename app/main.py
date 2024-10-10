@@ -29,13 +29,16 @@ class CarWashStation:
 
     def calculate_washing_price(self, car: Car) -> float:
         clean_diff = self.clean_power - car.clean_mark
-        pr_without_dist = car.comfort_class * clean_diff * self.average_rating
-        price = pr_without_dist / self.distance_from_city_center
+        price = (car.comfort_class
+                 * clean_diff
+                 * self.average_rating
+                 / self.distance_from_city_center)
         return round(price, 1)
 
     def wash_single_car(self, car: Car) -> None:
         if self.clean_power > car.clean_mark:
             car.clean_mark = self.clean_power
+        pass
 
     def rate_service(self, single_rate: int) -> None:
         sum_rate = (self.average_rating * self.count_of_ratings) + single_rate
